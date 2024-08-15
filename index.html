@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Preset</title>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Courier Prime', monospace;
+            background: url('https://images.unsplash.com/photo-1624644128945-920c0da6931b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MHx8fHwwfHwwfHx8Mg%3D%3D') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            transition: background 0.3s ease;
+        }
+
+        .dark-mode {
+            background: url('https://512pixels.net/downloads/os9-5k/Capsule.jpg') no-repeat center center fixed !important;
+            background-size: cover !important;
+        }
+
+        .window {
+            border: 3px solid #0078d7;
+            border-radius: 10px;
+            width: 90%;
+            height: 80vh;
+            margin: 0;
+            background-color: #fff;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            overflow: hidden;
+        }
+
+        @media screen and (max-width: 600px) {
+            .window {
+                width: 90%;
+                height: 80vh;
+            }
+        }
+
+        @media screen and (max-width: 390px) {
+            .window {
+                width: 95%;
+                height: 85vh;
+            }
+        }
+
+        .header {
+            background: linear-gradient(to bottom, #0078d7, #99ccff);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
+            color: #fff;
+            padding: 10px;
+            font-size: 1.2em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: move;
+        }
+
+        .header img {
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        .header .title {
+            display: flex;
+            align-items: center;
+        }
+  .header .minimize {
+    width: 30px;
+    height: 30px;
+    border: 3px solid white;
+    background: #ff2626;
+    border-radius: 4px;
+    cursor: pointer;
+    padding-top: 6px;
+    font-size: 1.5em;
+    text-align: center;
+    line-height: 1.5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+        .content {
+            padding: 20px;
+            height: calc(100% - 80px);
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        .tab {
+            display: inline-block;
+            margin-right: 10px;
+            padding: 5px 10px;
+            background-color: #eee;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .active {
+            background-color: #ddd;
+            height: auto;
+            border-bottom: 3px solid #0078d7;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            padding: 10px;
+    			border-radius: 4px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .project-item,
+        .shop-item {
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .project-item img,
+        .shop-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .project-images,
+        .shop-images {
+            display: flex;
+            overflow-x: auto;
+            padding: 10px 0;
+            gap: 10px;
+        }
+
+        .project-images img,
+        .shop-images img {
+            flex: 0 0 auto;
+            width: 300px;
+            height: 225px;
+        }
+
+
+        .shop-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .shop-item .title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .shop-item .price {
+            color: green;
+            margin-bottom: 10px;
+        }
+
+        .shop-item .description {
+            margin-bottom: 10px;
+        }
+
+        .shop-item .add-to-cart {
+            background-color: #0078d7;
+            color: #fff;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .taskbar {
+            background-color: #0078d7;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px;
+            box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        font-size: 0.8em;
+        }
+
+        .taskbar span {
+        font-size: 0.8em;
+        line-height: 2;
+        cursor: pointer;
+
+
+}
+        .taskbar img {
+            height: 30px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .footer-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-item span {
+            margin-right: 15px;
+        }
+
+        .footer-icons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+        }
+
+        .footer-icons img {
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        .clock {
+            margin-left: auto;
+            margin-right: 20px;
+            padding-left: 10px;
+            white-space: nowrap;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .overlay-content {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            overflow-y: auto;
+        }
+
+        .overlay-content img {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+
+        .overlay-content p {
+            margin: 10px 0;
+        }
+
+        .folder {
+            position: fixed;
+            bottom: 50%;
+            right: 50%;
+            transform: translate(50%, 50%);
+            width: 60px;
+            font-family: 'Roboto Mono', Monospace;
+            color: white;
+            font-size: 0.8em;
+            text-align: center;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .folder img {
+            width: 100%;
+            height: auto;
+        }
+
+.toggle-switch {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 60px;
+    height: 34px;
+    background-color: #b4b4b4;
+    border-radius: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s;
+}
+
+.toggle-switch .switch {
+    width: 28px;
+    height: 28px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    position: relative;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.toggle-switch .switch {
+    transform: translateX(4px);
+}
+
+body.light-mode .toggle-switch {
+    background-color: #ddddd;
+}
+
+body.light-mode .toggle-switch .switch {
+    background-color: #ffffff;
+}
+
+body.dark-mode .toggle-switch {
+    background-color: #b5b5b5;
+}
+
+body.dark-mode .toggle-switch .switch {
+    background-color: #444;
+    transform: translateX(24px);
+}
+
+.dark-mode .header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+    background: linear-gradient(to bottom, #ddd, #b5b5b5);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
+    cursor: move;
+}
+.dark-mode .header img {
+    order: 2;
+    height: 30px;
+    margin-left: 10px;
+}
+
+.dark-mode .header .title {
+    order: 1;
+    display: flex;
+    align-items: center;
+}
+
+.dark-mode .header .minimize {
+    margin-right: 10px;
+    padding-top: 6px;
+    max-height: 30px;
+    max-width: 30px;
+    border: 1px solid red;
+    background: linear-gradient(to bottom, #ff5e5e, #b22222);
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0.8em;
+    text-align: center;
+    line-height: 1.5;
+    color: black;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+                    .dark-mode .active {
+                        background-color: white;
+                        border-bottom: 3px solid black;
+                    }
+            
+                    .dark-mode .window {
+                        border-color: darkgray;
+                        font-family: 'DM Sans', Sans-Serif;
+                        background: linear-gradient(to bottom, gray, white);
+                    }
+           
+            
+                    .dark-mode .taskbar {
+                        font-family: 'Roboto Mono', Monospace;
+                        background: linear-gradient(to bottom, #8c8c8c, #c2c2c2);
+                        border-top: 2px solid #b5b5b5;
+                    }
+            
+                    .dark-mode .folder {
+                        position: fixed;
+                        bottom: 25%;
+                        right: 25%;
+                        transform: translate(50%, 50%);
+                        width: 60px;
+                        font-family: 'DM Sans', Sans-Serif;
+                        color: white;
+                        font-size: 0.8em;
+                        text-align: center;
+                        cursor: pointer;
+                        z-index: 1;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="window" id="popupWindow">
+                    <div class="header">
+                        <div class="title">
+                            <img src="https://upload.wikimedia.org/wikipedia/de/e/e6/Aphex_Twin_Logo.svg" alt="Kira Bü Logo">
+                            <span>Portfolio</span>
+                        </div>
+                        <button class="header minimize" onclick="hideWindow()">x</button>
+                    </div>
+                    <div class="content">
+                        <div class="tabs">
+                            <div class="tab active" onclick="showSection('projects')">Projects</div>
+                            <div class="tab" onclick="showSection('shop')">Shop</div>
+                            <div class="tab" onclick="showSection('about')">About</div>
+                        </div>
+                        <div id="projects" class="section active">
+                            <h1>Projects</h1>
+                            <div class="project-item">
+                                <h2>Project 1</h2>
+                                <div class="project-images">
+                                    <img src="https://images.unsplash.com/photo-1679027506214-b9e78b7c64dc?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8dWklMjB1eHxlbnwwfHwwfHx8Mg%3D%3D" alt="Project Image 1">
+                                    <img src="https://images.unsplash.com/photo-1671576193244-964fe85e1797?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8dWklMjB1eHxlbnwwfHwwfHx8Mg%3D%3D" alt="Project Image 2">
+                                </div>
+                                <p>Description of Project 1.</p>
+                            </div>
+                            <div class="project-item">
+                                <h2>Project 2</h2>
+                                <div class="project-images">
+                                    <img src="https://images.unsplash.com/photo-1679027506214-b9e78b7c64dc?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8dWklMjB1eHxlbnwwfHwwfHx8Mg%3D%3D" alt="Project Image 1">
+                                    <img src="https://images.unsplash.com/photo-1671576193244-964fe85e1797?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8dWklMjB1eHxlbnwwfHwwfHx8Mg%3D%3D" alt="Project Image 2">
+                                </div>
+                                <p>Description of Project 2.</p>
+                            </div>
+                        </div>
+                        <div id="shop" class="section">
+                            <h1>Shop</h1>
+                            <div class="shop-item">
+                                <h2 class="title">Item 1</h2>
+                                <img src="https://images.unsplash.com/photo-1679027506214-b9e78b7c64dc?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8dWklMjB1eHxlbnwwfHwwfHx8Mg%3D%3D" alt="Item 1">
+                                <p class="price">.99</p>
+                                <p class="description">Description of Item 1.</p>
+                                <button class="add-to-cart">Add to Cart</button>
+                            </div>
+                            <div class="shop-item">
+                                <h2 class="title">Item 2</h2>
+                                <img src="https://images.unsplash.com/photo-1679027506214-b9e78b7c64dc?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8dWklMjB1eHxlbnwwfHwwfHx8Mg%3D%3D" alt="Item 2">
+                                <p class="price">.99</p>
+                                <p class="description">Description of Item 2.</p>
+                                <button class="add-to-cart">Add to Cart</button>
+                            </div>
+                        </div>
+                        <div id="about" class="section">
+                            <h1>About</h1>
+                            <p>This is a sample portfolio showcasing projects and shop items.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="taskbar">
+                    <div class="footer-item" onclick="showOverlay()">
+                        <img id="taskbar-logo" src="https://upload.wikimedia.org/wikipedia/vi/e/e4/Windows_logo_-_2002.svg" alt="Windows Logo">
+                        <span>Contact</span>
+                    </div>
+                    <div class="footer-icons">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Blender_logo_no_text.svg/2503px-Blender_logo_no_text.svg.png" alt="Blender">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Unity_Hub_Logo.png/640px-Unity_Hub_Logo.png" alt="Unity">
+                    </div>
+                    <div class="clock" id="clock"></div>
+                </div>
+            
+                <div class="folder" onclick="showWindow()">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Icons8_flat_folder.svg" alt="Folder Icon">
+                    <div>Website</div>
+                </div>
+            
+                <div class="overlay" id="overlay" onclick="hideOverlay(event)">
+                    <div class="overlay-content">
+                        <img src="https://cdn.creazilla.com/digital-illustrations/1717765/windows-xp-microsoft-icon-illustration-lg.png" alt="Windows XP">
+                        <p>Email: example@example.com</p>
+                        <p>Instagram: @example</p>
+                        <p>Behance: behance.net/example</p>
+                    </div>
+                </div>
+            
+                <div class="toggle-switch" onclick="toggleDarkMode()">
+                    <div class="switch"></div>
+                </div>
+            
+                <script>
+                    let isDarkMode = false;
+            
+                    function toggleDarkMode() {
+                        isDarkMode = !isDarkMode;
+                        document.body.classList.toggle('dark-mode', isDarkMode);
+                        
+                                    const toggleSwitch = document.querySelector('.toggle-switch .switch');
+                                    toggleSwitch.style.transform = isDarkMode ? 'translateX(30px)' : 'translateX(0)';
+                        
+                                    const taskbarLogo = document.getElementById('taskbar-logo');
+                                    taskbarLogo.src = isDarkMode ? 'https://upload.wikimedia.org/wikipedia/en/9/98/FinderBigSur.png' : 'https://upload.wikimedia.org/wikipedia/vi/e/e4/Windows_logo_-_2002.svg';
+
+const folderIcon = document.querySelector('.folder img');
+folderIcon.src = isDarkMode ? 'https://www.macworld.com/wp-content/uploads/2023/12/folder-icon-macos.png?quality=50&strip=all' : 'https://upload.wikimedia.org/wikipedia/commons/a/a1/Icons8_flat_folder.svg';
+
+                                }
+                        
+                                function showWindow() {
+                                    document.getElementById('popupWindow').style.display = 'block';
+                                }
+                        
+                                function hideWindow() {
+                                    document.getElementById('popupWindow').style.display = 'none';
+                                }
+                        
+                                function showSection(sectionId) {
+                                    var sections = document.getElementsByClassName('section');
+                                    for (var i = 0; i < sections.length; i++) {
+                                        sections[i].classList.remove('active');
+                                    }
+                                    document.getElementById(sectionId).classList.add('active');
+                        
+                                    var tabs = document.getElementsByClassName('tab');
+                                    for (var i = 0; i < tabs.length; i++) {
+                                        tabs[i].classList.remove('active');
+                                    }
+                                    event.target.classList.add('active');
+                                }
+                        
+                                function updateClock() {
+                                    var now = new Date();
+                                    var hours = now.getHours().toString().padStart(2, '0');
+                                    var minutes = now.getMinutes().toString().padStart(2, '0');
+                                    var timeString = hours + ':' + minutes;
+                                    document.getElementById('clock').textContent = timeString;
+                                }
+                        
+                                setInterval(updateClock, 1000);
+                                updateClock();
+                        
+                                function showOverlay() {
+                                    document.getElementById('overlay').style.display = 'flex';
+                                }
+                        
+                                function hideOverlay(event) {
+                                    if (event.target === document.getElementById('overlay')) {
+                                        document.getElementById('overlay').style.display = 'none';
+                                    }
+                                }
+                            </script>
+                        </body>
+                        </html>
